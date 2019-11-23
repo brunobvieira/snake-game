@@ -1,10 +1,7 @@
 window.onload = function() {
-  const canvas = document.getElementById("snake");
-  const context = canvas.getContext("2d");
+    const canvas = document.getElementById("snake");
+    const context = canvas.getContext("2d");
 
-
-
-
-  let snake = new Snake(context, 10);
-  snake.draw();
+    const game = new Game(context, canvas.width, canvas.height);
+    game.start();
 };

@@ -1,11 +1,11 @@
 class Snake {
     constructor(size) {
         this.size = size;
-        this.direction = null;
+        this.direction = 'RIGHT';
         this.body = [
-            { x: this.size * 3, y: 3 },
-            { x: this.size * 2, y: 3 },
-            { x: this.size * 1, y: 3 }
+            { x: this.size * 3, y: this.size * 1 },
+            { x: this.size * 2, y: this.size * 1 },
+            { x: this.size * 1, y: this.size * 1 }
         ];
     }
 
@@ -20,7 +20,19 @@ class Snake {
         }
     }
 
+    handleKeydown(keyPressed) {
+        this.setDirection(keyPressed);
+    }
+
     setDirection(keyPressed) {
         console.log(keyPressed);
+
+        const allowedKeys = {
+            Arrowup: () => {
+                console.log("key up pressed");
+            }
+        };
     }
+
+    move() {}
 }
