@@ -1,3 +1,7 @@
+import Snake from "./Snake.js";
+import Food from "./Food.js";
+import KeyListener from "./KeyListener.js";
+
 class Game {
     constructor(context, width, height) {
         this.context = context;
@@ -32,16 +36,19 @@ class Game {
         if (!this.initialized) this.init();
 
         this.intervalId = setInterval(() => {
+            if (this.snake.hitSomething(this.height, this.width)) {
+                this.stop();
+                return false;
+            }
+
             //Drawing the game
             this.context.clearRect(0, 0, this.width, this.height);
             this.food.draw(this.context);
             this.snake.draw(this.context);
 
-            let snakeHead = this.snake.body[0];
-
             // If the Snake eat the food
-            if (this.food.x == snakeHead.x && this.food.y == snakeHead.y) {
-                this.score ++;
+            if (this.snake.eatSomething(this.food)) {
+                this.score++;
                 this.snake.grow();
                 this.food.updatePosition(this.width, this.height);
             }
@@ -53,7 +60,9 @@ class Game {
 
     stop() {
         clearInterval(this.intervalId);
-        this.listener.unregister();
-        this.listener.unsubscribeAll();
+        this.intervalId = null;
+        this.initialized = false;
     }
 }
+
+export default Game;

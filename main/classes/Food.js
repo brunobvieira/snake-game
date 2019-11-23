@@ -19,3 +19,5 @@ class Food {
         context.strokeRect(this.x, this.y, this.size, this.size);
     }
 }
+
+export default Food;

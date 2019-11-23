@@ -30,3 +30,5 @@ class KeyListener {
         document.removeEventListener("keydown", this);
     }
 }
+
+export default KeyListener;

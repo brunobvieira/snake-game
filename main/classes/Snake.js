@@ -63,4 +63,30 @@ class Snake {
     grow() {
         this.body.push(Object.assign({}, this.body[0]));
     }
+
+    hitSomething(mh, mw) {
+        let head = this.body[0];
+
+        // if snake hit the body
+        for (let i = 1; i < this.body.length; i++) {
+            let piece = this.body[i];
+            if (head.x == piece.x && head.y == piece.y) {
+                return true;
+            }
+        }
+
+        // if snake hit the wall
+        if (head.x < 0 || head.x > mw || head.y < 0 || head.y > mh) {
+            return true;
+        }
+
+        return false;
+    }
+
+    eatSomething(food) {
+        let head = this.body[0];
+        return food.x == head.x && food.y == head.y;
+    }
 }
+
+export default Snake;
