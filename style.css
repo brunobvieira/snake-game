@@ -1,0 +1,9 @@
+body {
+    display: flex;
+    align-items: center;
+}
+
+#snake {
+    margin: auto;
+    background-color: #000000;
+}
