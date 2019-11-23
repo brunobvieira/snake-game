@@ -32,11 +32,23 @@ class Game {
         if (!this.initialized) this.init();
 
         this.intervalId = setInterval(() => {
+            //Drawing the game
+            this.context.clearRect(0, 0, this.width, this.height);
             this.food.draw(this.context);
             this.snake.draw(this.context);
 
+            let snakeHead = this.snake.body[0];
+
+            // If the Snake eat the food
+            if (this.food.x == snakeHead.x && this.food.y == snakeHead.y) {
+                this.score ++;
+                this.snake.grow();
+                this.food.updatePosition(this.width, this.height);
+            }
+
+            // Move the Snake
             this.snake.move();
-        }, 600);
+        }, 100);
     }
 
     stop() {

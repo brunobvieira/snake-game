@@ -1,7 +1,7 @@
 class Snake {
     constructor(size) {
         this.size = size;
-        this.direction = 'RIGHT';
+        this.direction = "RIGHT";
         this.body = [
             { x: this.size * 3, y: this.size * 1 },
             { x: this.size * 2, y: this.size * 1 },
@@ -25,14 +25,42 @@ class Snake {
     }
 
     setDirection(keyPressed) {
-        console.log(keyPressed);
-
-        const allowedKeys = {
-            Arrowup: () => {
-                console.log("key up pressed");
+        const keyHandlers = {
+            ArrowUp: () => {
+                if (this.direction != "DOWN") this.direction = "UP";
+            },
+            ArrowDown: () => {
+                if (this.direction != "UP") this.direction = "DOWN";
+            },
+            ArrowRight: () => {
+                if (this.direction != "LEFT") this.direction = "RIGHT";
+            },
+            ArrowLeft: () => {
+                if (this.direction != "RIGHT") this.direction = "LEFT";
             }
         };
+
+        let keyHandler = keyHandlers[keyPressed];
+        if (!keyHandler) return false;
+        keyHandler();
+        return true;
     }
 
-    move() {}
+    move() {
+        let head = Object.assign({}, this.body[0]);
+        let newX = head.x;
+        let newY = head.y;
+
+        if (this.direction == "RIGHT") newX += this.size;
+        if (this.direction == "LEFT") newX -= this.size;
+        if (this.direction == "UP") newY -= this.size;
+        if (this.direction == "DOWN") newY += this.size;
+
+        this.body.pop();
+        this.body.unshift({ x: newX, y: newY });
+    }
+
+    grow() {
+        this.body.push(Object.assign({}, this.body[0]));
+    }
 }
