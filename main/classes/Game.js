@@ -62,6 +62,7 @@ class Game {
         clearInterval(this.intervalId);
         this.intervalId = null;
         this.initialized = false;
+        alert(`Your score: ${this.score}, press any button to try again.`);
     }
 }
 
